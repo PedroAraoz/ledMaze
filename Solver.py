@@ -1,6 +1,6 @@
-import numpy as np
-from numpy import matrix
 from typing import List
+
+from numpy import matrix
 
 from Cell import Cell
 from Maze import Maze
@@ -26,11 +26,10 @@ def BFS(maze: Maze):
     while len(queue) > 0:
         v = pop(queue)
         # win condition
-        if v.y == maze.height - 1:
-            return v
+        if v.y == 0:
+            return queue
         neighbors: List[Cell] = adjacentEdges(maze.cells, v)
         for n in neighbors:
-            print("NO!!!!")
-            n.visited = True
-            #       neighbors[i].parent = curNode;
-            queue.append(n)
+            if not n.visited:
+                n.visited = True
+                queue.append(n)

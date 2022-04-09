@@ -1,7 +1,3 @@
-import random
-from random import randint
-from time import sleep
-
 import numpy as np
 from matplotlib import patches
 from matplotlib.path import Path
@@ -48,11 +44,11 @@ def left(cell: Cell):
 def drawCell(cell: Cell, ax):
     if cell.visited:
         ax.plot(cell.x + 0.5, cell.y + 0.5, "ro")
-    if cell.walls['t']:
+    if cell.walls['north']:
         ax.add_patch(top(cell))
-    if cell.walls['b']:
+    if cell.walls['south']:
         ax.add_patch(bottom(cell))
-    if cell.walls['r']:
+    if cell.walls['east']:
         ax.add_patch(right(cell))
-    if cell.walls['l']:
+    if cell.walls['west']:
         ax.add_patch(left(cell))
