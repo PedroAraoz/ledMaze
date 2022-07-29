@@ -1,7 +1,6 @@
 # Led Maze
 
-A maze generator and solver that displays it in a (hopefully) pretty way through a LED matrix.
-
+A maze generator and solver that displays it in a (hopefully) pretty way through a LED matrix.<br>
 This Proof of Concept of the idea is based on Numberphile's video 
 ["The Lightning Algorithm"](https://www.youtube.com/watch?v=akZ8JJ4gGLs).
 
