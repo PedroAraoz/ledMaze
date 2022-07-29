@@ -31,7 +31,7 @@ for i in range(SAMPLE_SIZE):
     steps = get_steps(maze)
     delay = utime.ticks_diff(utime.ticks_ms(), to)
     delays.append(delay)
-    print(f"{i}/{SAMPLE_SIZE}")
+    print(f"{i+1}/{SAMPLE_SIZE}")
 
 print(f"sample size: {SAMPLE_SIZE}")
 print(f"max delay: {max(delays)}ms")
