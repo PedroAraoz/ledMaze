@@ -1,20 +1,23 @@
 import numpy as np
 from matplotlib import patches
 from matplotlib.path import Path
-
+import matplotlib.pyplot as plt
 from Cell import Cell
 from Maze import Maze
 
 
-def draw(maze: Maze, plt):
+# Used for debugging
+
+def draw(maze: Maze):
     rect = patches.Rectangle((0, 0), 8, 8, linewidth=6, edgecolor='r', facecolor='none')
 
     fig, ax = plt.subplots()
     ax.set(autoscale_on=False, xlim=(0, 8), ylim=(0, 9))
-    np.vectorize(drawCell)(maze.cells, ax)
+    np.vectorize(drawCell)(maze.cells, ax, plt)
     x, _ = maze.start_position.coords
     ax.annotate("", xy=(x + .5, 8), xytext=(x + .5, 9), arrowprops=dict(arrowstyle="->"))
     ax.add_patch(rect)
+    plt.show()
 
 
 def top(cell: Cell):
@@ -41,9 +44,9 @@ def left(cell: Cell):
     return patches.PathPatch(path, facecolor='none', lw=2)
 
 
-def drawCell(cell: Cell, ax):
+def drawCell(cell: Cell, ax, plt):
     if cell.visited:
-        ax.plot(cell.x + 0.5, cell.y + 0.5, "ro")
+        plt.text(cell.x + 0.5, cell.y + 0.5, cell.step)
     if cell.walls['north']:
         ax.add_patch(top(cell))
     if cell.walls['south']:

@@ -11,13 +11,8 @@ class Cell:
             'west': True
         }
         self.visited = False
-
-    def __repr__(self):
-        return f'({self.x}, {self.y})'
-
-    def __str__(self):
-        self.walls.keys()
-        return f'({self.x}, {self.y})'
+        self.step = 0
 
     def connect(self, direction):
         self.walls[direction] = False
+

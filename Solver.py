@@ -1,15 +1,4 @@
-from typing import List
-
-from numpy import matrix
-
-from Cell import Cell
 from Maze import Maze
-
-
-def adjacentEdges(maze: matrix, cell: Cell):
-    b = cell.getNeighbours()
-    a = list(map(lambda x: maze[x], b))
-    return a
 
 
 def pop(lst: list):
@@ -18,18 +7,20 @@ def pop(lst: list):
     return e
 
 
-def BFS(maze: Maze):
+def breadth_first_search(maze: Maze):
     start = maze.start_position
     start.visited = True
     queue = list()
-    queue.append(start)
+    queue.append([1, start])
     while len(queue) > 0:
-        v = pop(queue)
+        [step, v] = pop(queue)
+        v.visited = True
+        v.step = step
         # win condition
         if v.y == 0:
+            maze.totalSteps = step
             return queue
-        neighbors: List[Cell] = adjacentEdges(maze.cells, v)
+        neighbors = maze.get_valid_non_visited_neighbours(v)
+        neighbors = list(map(lambda x: x[1], neighbors.items()))
         for n in neighbors:
-            if not n.visited:
-                n.visited = True
-                queue.append(n)
+            queue.append([step + 1, n])
