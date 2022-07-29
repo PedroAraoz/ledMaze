@@ -7,7 +7,7 @@ from Maze import Maze, connect
 
 def generate_depth_first_search_maze(n, m):
     maze = _generate_full_maze(n, m)
-    maze.start_position = maze.cells[randint(0, maze.width - 1)][maze.height - 1]
+    maze.start_position = maze.cells[0][randint(0, maze.width - 1)]
     _depth_first_search(maze, maze.start_position)
     maze.reset_visited()
     return maze

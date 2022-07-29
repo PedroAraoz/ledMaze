@@ -1,3 +1,4 @@
+from Draw import draw
 from Generation import generate_depth_first_search_maze
 from Solver import breadth_first_search
 
@@ -24,5 +25,4 @@ def get_steps(maze):
 
 maze = get_maze(30)
 steps = get_steps(maze)
-for step in steps:
-    print(step)
+draw(maze, steps)

@@ -17,7 +17,7 @@ def breadth_first_search(maze: Maze):
         v.visited = True
         v.step = step
         # win condition
-        if v.y == 0:
+        if v.x == maze.height-1:
             maze.totalSteps = step
             return queue
         neighbors = maze.get_valid_non_visited_neighbours(v)
