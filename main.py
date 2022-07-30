@@ -6,13 +6,12 @@ import time
 import _thread
 
 MATRIX_SIZE = (8, 8)
-MAZE_MIN_LEN = 39
+MAZE_MIN_LEN = 40
 LEDS = 8 * 8
 strip = Neopixel(LEDS, 0, 0, "GRB")
 strip.brightness(8)
 # Color variables
-MAIN_COLOR = (60, 56, 255)
-PATH_COLOR = (0, 255, 0)
+PATH_COLOR = (255, 255, 100)
 # Thread variables
 global newMaze
 newMaze = (None, None)
@@ -67,12 +66,15 @@ def draw_path():
     for i in path:
         strip.set_pixel(i, PATH_COLOR)
         strip.show()
-        time.sleep(0.08)
+        time.sleep(0.06)
 
 
 def flash_path(times=2, delay=0.3):
     for _ in range(times):
-        for i in path: strip.set_pixel(i, MAIN_COLOR)
+        for i in path:
+            hue = int((i / len(path)) * 65535)
+            color = strip.colorHSV(hue, 255, 255)
+            strip.set_pixel(i, color)
         strip.show()
         time.sleep(delay)
         for i in path:  strip.set_pixel(i, PATH_COLOR)
@@ -93,9 +95,11 @@ while True:
         usedMaze = True
         clear()
         while current_step <= maze.totalSteps:
+            hue = int((current_step / maze.totalSteps) * 65535)
+            color = strip.colorHSV(hue, 255, 255)
             for index, val in enumerate(steps):
                 if val == current_step:
-                    strip.set_pixel(index, PATH_COLOR)
+                    strip.set_pixel(index, color)
             strip.show()
             current_step += 1
             time.sleep(0.11)
@@ -103,4 +107,4 @@ while True:
         draw_path()
         time.sleep(0.1)
         flash_path()
-        time.sleep(1)
+        time.sleep(0.1)
