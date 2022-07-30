@@ -6,7 +6,7 @@ IMPORTANT_COLOR = '\033[94m'
 PATH_COLOR = '\033[95m'
 
 
-def draw(maze: Maze):
+def printMaze(maze: Maze):
     steps = list(map(lambda x: list(map(lambda y: y.step, x)), maze.cells))
     for row in steps:
         print("[", end='')
@@ -19,18 +19,11 @@ def draw(maze: Maze):
         print("]")
 
 
-def draw_solved(maze):
-    cell: Cell = maze.end_position
-    stack = list()
-    while cell.parent is not None:
-        stack.append(cell)
-        cell = cell.parent
-    stack.append(cell)
-    matrix = maze.cells
-    for cells in matrix:
+def print_solved(maze):
+    for cells in maze.cells:
         print("[", end='')
         for c in cells:
-            if c in stack:
+            if (c.y + 8 * c.x) in maze.path:
                 print(IMPORTANT_COLOR, end='')
             elif c != 0:
                 print(PATH_COLOR, end='')
@@ -38,7 +31,7 @@ def draw_solved(maze):
         print("]")
 
 
-def draw_step(steps, s):
+def print_step(steps, s):
     print('\n\n\n\n\n')
     for row in steps:
         print("[", end='')

@@ -20,6 +20,7 @@ class Maze:
         self.width, self.height = width, height
         self.dimension = (width, height)
         self.totalSteps = -1
+        self.path = list()
 
     def reset_visited(self):
         for line in self.cells:
@@ -52,3 +53,10 @@ class Maze:
     def set_end_position(self, cell: Cell):
         self.totalSteps = cell.step
         self.end_position = cell
+        path = list()
+        c = cell
+        while c.parent is not None:
+            path.append(c.y + 8 * c.x)
+            c = c.parent
+        path.append(c.y + 8 * c.x)
+        self.path = path

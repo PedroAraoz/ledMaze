@@ -1,4 +1,4 @@
-from Draw import draw
+from Printer import printMaze
 from Generation import generate_depth_first_search_maze
 from Solver import breadth_first_search
 from neopixel import Neopixel
@@ -6,15 +6,14 @@ import time
 import _thread
 
 MATRIX_SIZE = (8, 8)
+MAZE_MIN_LEN = 39
 LEDS = 8 * 8
 strip = Neopixel(LEDS, 0, 0, "GRB")
 strip.brightness(8)
-# Color definitions
-head = (34, 56, 255)
-middle = (255, 35, 0)
-tail = (20, 20, 0)
-blank = (0, 0, 0)
-
+# Color variables
+MAIN_COLOR = (60, 56, 255)
+PATH_COLOR = (0, 255, 0)
+# Thread variables
 global newMaze
 newMaze = (None, None)
 global usedMaze
@@ -28,7 +27,7 @@ def generate_solved_maze():
     return maze
 
 
-def get_maze(min_steps=39):
+def get_maze(min_steps=MAZE_MIN_LEN):
     while True:
         maze = generate_solved_maze()
         if maze.totalSteps > min_steps:
@@ -55,8 +54,30 @@ def maze_generation_thread():
         if usedMaze:
             newMaze = get_maze_and_steps()
             usedMaze = False
-            #print('new maze generated')
+            # print('new maze generated')
         time.sleep(0.3)
+
+
+def clear():
+    strip.clear()
+    strip.show()
+
+
+def draw_path():
+    for i in path:
+        strip.set_pixel(i, PATH_COLOR)
+        strip.show()
+        time.sleep(0.08)
+
+
+def flash_path(times=2, delay=0.3):
+    for _ in range(times):
+        for i in path: strip.set_pixel(i, MAIN_COLOR)
+        strip.show()
+        time.sleep(delay)
+        for i in path:  strip.set_pixel(i, PATH_COLOR)
+        strip.show()
+        time.sleep(delay)
 
 
 _thread.start_new_thread(maze_generation_thread, ())
@@ -67,20 +88,19 @@ while True:
         global newMaze
         current_step = 1
         (maze, steps) = newMaze
-        draw(maze)
+        printMaze(maze)
+        path = maze.path
         usedMaze = True
-        strip.clear()
-        strip.show()
+        clear()
         while current_step <= maze.totalSteps:
             for index, val in enumerate(steps):
                 if val == current_step:
-                    strip.set_pixel(index, ((34*val)%255, 56, 255))
-                #elif val == current_step - 1:
-                    #strip.set_pixel(index, middle)
-                #elif val == current_step - 2:
-                    #strip.set_pixel(index, head)
-                #else:
-                    #strip.set_pixel(index, blank)
+                    strip.set_pixel(index, PATH_COLOR)
             strip.show()
             current_step += 1
             time.sleep(0.11)
+        time.sleep(0.5)
+        draw_path()
+        time.sleep(0.1)
+        flash_path()
+        time.sleep(1)
