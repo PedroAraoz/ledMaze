@@ -12,6 +12,7 @@ class Cell:
         }
         self.visited = False
         self.step = 0
+        self.parent = None
 
     def connect(self, direction):
         self.walls[direction] = False

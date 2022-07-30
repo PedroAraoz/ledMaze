@@ -1,3 +1,4 @@
+from Cell import Cell
 from Maze import Maze
 
 RESET = '\033[0m'
@@ -15,6 +16,25 @@ def draw(maze: Maze):
             elif step != 0:
                 print(PATH_COLOR, end='')
             print("%3s" % step, end=f'{RESET},')
+        print("]")
+
+
+def draw_solved(maze):
+    cell: Cell = maze.end_position
+    stack = list()
+    while cell.parent is not None:
+        stack.append(cell)
+        cell = cell.parent
+    stack.append(cell)
+    matrix = maze.cells
+    for cells in matrix:
+        print("[", end='')
+        for c in cells:
+            if c in stack:
+                print(IMPORTANT_COLOR, end='')
+            elif c != 0:
+                print(PATH_COLOR, end='')
+            print("%3s" % c.step, end=f'{RESET},')
         print("]")
 
 
