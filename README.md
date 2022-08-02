@@ -4,6 +4,8 @@ A maze generator and solver that displays it in a (hopefully) pretty way through
 This Proof of Concept of the idea is based on Numberphile's video
 ["The Lightning Algorithm"](https://www.youtube.com/watch?v=akZ8JJ4gGLs).
 
+![leds](https://user-images.githubusercontent.com/22825402/182477022-1cd9cb8b-a2e8-4359-882a-b2876e25b532.gif)
+
 ### Table of contents
 
 1. [About](#About)
@@ -36,6 +38,7 @@ and try to make some cool patterns.
 #### 3D Printed Files
 
 * ...
+
 
 #### Steps
 
