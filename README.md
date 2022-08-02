@@ -8,10 +8,10 @@ This Proof of Concept of the idea is based on Numberphile's video
 
 1. [About](#About)
 2. [Instructions](#Instructions)
-    1. [Hardware Components](#Hardware Components)
+    1. [Hardware Components](#Hardware-Components)
     2. [Schematic](#Schematic)
-    3. [3D Printed Files](#3D Printed Files)
-    4. [Instructions](#Instructions)
+    3. [3D Printed Files](#3D-Printed-Files)
+    4. [Steps](#Steps)
 3. [Performance](#Performance)
 3. [Contribution](#Contribution)
 
@@ -32,7 +32,8 @@ and try to make some cool patterns.
 
 #### Schematic
 ![schematic](/images/sketch.png)
-#### 3D Printed Files:
+
+#### 3D Printed Files
 
 * ...
 
