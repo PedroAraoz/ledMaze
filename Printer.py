@@ -6,7 +6,7 @@ IMPORTANT_COLOR = '\033[94m'
 PATH_COLOR = '\033[95m'
 
 
-def printMaze(maze: Maze):
+def print_maze(maze: Maze):
     steps = list(map(lambda x: list(map(lambda y: y.step, x)), maze.cells))
     for row in steps:
         print("[", end='')

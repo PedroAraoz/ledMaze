@@ -1,4 +1,4 @@
-from Printer import printMaze
+from Printer import print_maze
 from Generation import generate_depth_first_search_maze
 from Solver import breadth_first_search
 from neopixel import Neopixel
@@ -8,10 +8,12 @@ import _thread
 MATRIX_SIZE = (8, 8)
 MAZE_MIN_LEN = 40
 LEDS = 8 * 8
-strip = Neopixel(LEDS, 0, 0, "GRB")
-strip.brightness(8)
-# Color variables
+BRIGHTNESS = 8
 PATH_COLOR = (255, 255, 100)
+
+strip = Neopixel(LEDS, 0, 0, "GRB")
+strip.brightness(BRIGHTNESS)
+
 # Thread variables
 global newMaze
 newMaze = (None, None)
@@ -19,6 +21,9 @@ global usedMaze
 usedMaze = True
 
 
+# --------------------------
+# Maze Generation Functions
+# --------------------------
 def generate_solved_maze():
     (n, m) = MATRIX_SIZE
     maze = generate_depth_first_search_maze(n, m)
@@ -46,17 +51,9 @@ def get_maze_and_steps():
     return maze, get_steps(maze)
 
 
-def maze_generation_thread():
-    global newMaze
-    global usedMaze
-    while True:
-        if usedMaze:
-            newMaze = get_maze_and_steps()
-            usedMaze = False
-            # print('new maze generated')
-        time.sleep(0.3)
-
-
+# --------------------
+# Led strip functions
+# --------------------
 def clear():
     strip.clear()
     strip.show()
@@ -82,15 +79,32 @@ def flash_path(times=2, delay=0.3):
         time.sleep(delay)
 
 
+# ----------------------
+# Initialize new thread
+# ----------------------
+def maze_generation_thread():
+    global newMaze
+    global usedMaze
+    while True:
+        if usedMaze:
+            newMaze = get_maze_and_steps()
+            usedMaze = False
+        time.sleep(0.3)
+
+
 _thread.start_new_thread(maze_generation_thread, ())
 time.sleep(1)
+
+# ----------
+# Main Loop
+# ----------
 while True:
     global usedMaze
     if not usedMaze:
         global newMaze
         current_step = 1
         (maze, steps) = newMaze
-        printMaze(maze)
+        print_maze(maze)
         path = maze.path
         usedMaze = True
         clear()
