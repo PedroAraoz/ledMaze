@@ -88,8 +88,7 @@ Any contribution to the project is greatly appreciated, just open a PR.
 ### Sponsors
 
 <a href="https://github.com/seib0">
-    <div style="display: flex;flex-direction: column;width: 50px;text-align: center;">
-        <img src="https://avatars.githubusercontent.com/seib0">
-        seib0
-    </div>
+   <img src="https://avatars.githubusercontent.com/seib0" width="50px">
+   <br>
+   seib0
 </a>
