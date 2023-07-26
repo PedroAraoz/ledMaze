@@ -15,7 +15,8 @@ This Proof of Concept of the idea is based on Numberphile's video
     3. [3D Printed Files](#3D-Printed-Files)
     4. [Steps](#Steps)
 3. [Performance](#Performance)
-3. [Contribution](#Contribution)
+4. [Contribution](#Contribution)
+5. [Sponsors](#Sponsors)
 
 ### About
 
@@ -82,3 +83,13 @@ If you never want to have a delay larger than 10s you should probably decrease t
 ### Contribution
 
 Any contribution to the project is greatly appreciated, just open a PR. 
+
+
+### Sponsors
+
+<a href="https://github.com/seib0">
+    <div style="display: flex;flex-direction: column;width: 50px;text-align: center;">
+        <img src="https://avatars.githubusercontent.com/seib0">
+        seib0
+    </div>
+</a>
